@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState, useEffect}, React from 'react'
+import { useState, useEffect} from 'react';
+import Form from './components/Form';
+import List from './components/List';
 
 function App() {
   const API_URL = 'https://jsonplaceholder.typicode.com/'
-  const [reqType, setReqType] = useEffect('user');
+  const [reqType, setReqType] = useState('user');
   const [reqdata, setReqData] = useState([]);
 
   useEffect(() => {
@@ -17,12 +19,21 @@ function App() {
         console.log(err);
     }
   } 
-  fetchData();
-}, [reqType])
 
+  fetchData();
+  }, [reqType])
 
   return (
     <div className="App">
+      <Form 
+        reqType={reqType}
+        setReqType={setReqType}
+      />
+
+      <List 
+        reqdata={reqdata}
+      />
+    
     </div>
   );
 }
